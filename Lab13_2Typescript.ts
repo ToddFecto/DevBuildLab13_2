@@ -1,10 +1,10 @@
 //Part 1: Tallest Mountain
 
-//Declare Interface
+//Declare Interface 1
 interface Mountain {
-    name: string;
-    height: number;
-}
+    name: string,
+    height: number
+};
 
 //Declare Array
 let mountains:Mountain[] = [
@@ -36,11 +36,11 @@ console.log(tallestmountain);
 
 //Part 2: PRODUCTS
 
-//Declare Interface
+//Declare Interface 2
 interface Product {
-    name: string;
-    price: number;
-}
+    name: string,
+    price: number
+};
 
 //Declare Array
 let products:Product[] = [
@@ -71,62 +71,56 @@ console.log(averagePrice);
 
 //Part3: INVENTORY
 
-//Declare Interface
-interface InventoryItem extends Product{
-    product: Product;
-     quantity: number;
-}
+//Declare Interface 3
+interface InventoryItem {
+    product: Product,
+    quantity: number
+};
 
 //Declare Array
 let inventory:InventoryItem[] = [
-        {product.name: 'motor', product.price: 10.00, quantity: 10},
-        {product.name: 'sensor', product.price: 12.50, quantity: 4},
-        {product.name: 'LED', product.price: 1.00, quantity: 20}
+        {
+            product: {
+                name: 'motor', 
+                price: 10.00
+             },
+              quantity: 10
+        },
+
+        {
+            product: {
+                name: 'sensor',
+                price: 12.50
+             },
+              quantity: 4
+        },
+
+        {
+            product: {
+                name: 'LED', 
+                price: 1.00
+            },
+             quantity: 20
+        }
     ];
 
 //Declare Function
 function calcInventoryValue(allitems: InventoryItem[]):number {
     let totalInvCost: number = 0;
     
+    /* // Produces a NaN (Not a Number) result when run
     for (let i=0; i<allitems.length; i++) {
-        totalInvCost = (totalInvCost + allitems[i].price * allitems[i].quantity[i]);
-     }
+        totalInvCost = (totalInvCost + allitems[i].product.price * allitems[i].quantity[i]);
+     };*/
 
+         /* // Produces a NaN (Not a Number) result when run
+    for (let i=0; i<allitems.length; i++) {
+        totalInvCost += allitems[i].product.price * allitems[i].quantity[i];
+     };*/
+
+     allitems.forEach( (item: InventoryItem) => totalInvCost += item.product.price * item.quantity );
      return totalInvCost;
 }
 
 let totalInventory: number = calcInventoryValue(inventory);
-console.log(totalInventory);  //Returns NaN output
-
-//Test Case to treat InventoryItem Interface as just having three properties:
-//Declare Interface
-/*
-interface InventoryItem {
-    
-    name: string;
-    price: number;
-
-quantity: number;
-}
-
-//Declare Array
-let inventory:InventoryItem[] = [
-    {name: 'motor', price: 10.00, quantity: 10},
-    {name: 'sensor', price: 12.50, quantity: 4},
-    {name: 'LED', price: 1.00, quantity: 20}
-];
-
-//Declare Function
-function calcInventoryValue(allitems: InventoryItem[]):number {
-let totalInvCost: number = 0;
-
-for (let i=0; i<allitems.length; i++) {
-    totalInvCost = (totalInvCost + allitems[i].price * allitems[i].quantity[i]);
- }
-
- return totalInvCost;
-}
-
-let totalInventory: number = calcInventoryValue(inventory);
 console.log(totalInventory);
-*/
